@@ -1,0 +1,136 @@
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100vh;
+    width: 100vw;
+}
+
+.str-chat {
+    display: block;
+
+    height: 90vh;
+    max-height: 90vh;
+
+    width: 100%;
+    max-width: 90vw;
+
+    box-sizing: border-box;
+}
+
+.str-chat__container {
+    height: 100%;
+    width: 100%;
+
+    border-radius: 25px;
+    background-color: #DDDDDD;
+
+    padding: 5px;
+}
+
+.str-chat__main-panel {
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+    width: 100%;
+
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+.str-chat__list {
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+    width: 100%;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.chat-header {
+    background: linear-gradient(264.75deg, #D645FA 0%, #4749FC 100%);
+    background-blend-mode: saturation;
+    mix-blend-mode: normal;
+
+    height: 60px;
+    display: flex;
+    align-items: center;
+
+    border-radius: 20px 20px 0 0;
+    padding: 20px;
+
+    flex: 0 0 auto;
+
+    .header-item {
+        color: #fff;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 16px;
+
+        flex: 1 1 auto;
+    }
+
+    .header-edit-icon {
+        flex: 0 0 auto;
+    }
+}
+
+.chat-input {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 20px;
+    margin: 10px;
+    padding-left: 15px;
+    padding-right: 5px;
+
+    border: #a0a0a0 1px solid;
+
+    flex: 0 0 auto;
+
+    .str-chat__textarea {
+        display: flex;
+        align-items: center;
+        flex: 1 1 100%;
+    
+        height: 100%;
+        width: 100%;
+    
+        .str-chat__textarea__textarea {
+            height: 100%;
+            width: 100%;
+            
+            border: none;
+            font-family: 'Inter';
+        }
+    }
+
+    .str-chat__send-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 8px;
+
+        background: linear-gradient(180deg, #8A5DF9 0%, #4749FC 100%);
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: none;
+
+        svg {
+            height: 16px;
+            width: 16px;
+
+            path {
+                fill: #fff;
+            }
+        }
+    }
+}
