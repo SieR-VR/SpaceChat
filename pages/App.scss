@@ -7,6 +7,51 @@ main {
     width: 100vw;
 }
 
+.twitter-button-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    flex: 1;
+
+    .twitter-button {
+        width: 100px;
+        height: 100px;
+
+        border-radius: 50%;
+        background-color: #1DA1F2;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: 0;
+        margin-bottom: 10px;
+    }
+
+    .twitter-button-description {
+        font-family: 'Inter';
+        font-size: 12px;
+        font-weight: 600;
+        text-align: center;
+        color: #ccc;
+    }
+}
+
+.title-lower {
+    font-family: 'Inter';
+    font-size: 32px;
+    font-weight: 800;
+    text-align: center;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+
+    background-image: linear-gradient(45deg, #D645FA 0%, #4749FC 100%);
+    margin-bottom: 50px;
+}
+
 .str-chat {
     display: block;
 
@@ -80,6 +125,92 @@ main {
     }
 }
 
+.str-chat__reverse-infinite-scroll {
+    height: 100%;
+    width: 100%;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    .str-chat__ul {
+        height: 100%;
+        width: 100%;
+
+        .str-chat__li {
+            width: 100%;
+            padding: 10px;
+        }
+    }
+}
+
+.message-wrapper {
+    display: flex;
+    justify-content: flex-end;
+
+    .message-wrapper-content {
+        display: flex;
+        flex-direction: column;
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            .message-header-name {
+                color: #000;
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 800;
+                font-size: 12px;
+            }
+        }
+
+        .str-chat__message-text {
+            border-radius: 20px;
+            min-width: 50px;
+            min-height: 10px;
+
+            border: 2px solid transparent;
+            background-image: linear-gradient(#fff, #fff), linear-gradient(to right, #D645FA 0%, #4749FC 100%);
+
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+
+            font-family: 'Inter';
+            font-size: smaller;
+
+            .str-chat__message-text-inner {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+
+                padding-right: 10px;
+                padding-left: 10px;
+
+                .str-chat__simple-message--error-message {
+                    display: none;
+                }
+
+                p {
+                    font-family: 'Inter';
+                    font-size: 16px;
+                }
+            }
+        }
+
+        .message-header-timestamp {
+            display: flex;
+            justify-content: flex-end;
+
+            color: #777;
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 800;
+            font-size: 5px;
+        }
+    }
+}
+
 .chat-input {
     height: 40px;
     display: flex;
@@ -99,14 +230,14 @@ main {
         display: flex;
         align-items: center;
         flex: 1 1 100%;
-    
+
         height: 100%;
         width: 100%;
-    
+
         .str-chat__textarea__textarea {
             height: 100%;
             width: 100%;
-            
+
             border: none;
             font-family: 'Inter';
         }

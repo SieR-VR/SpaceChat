@@ -1,4 +1,6 @@
+import Image from "next/image";
 import { ChannelHeaderProps, TypingIndicator, useChannelStateContext } from "stream-chat-react";
+
 
 export default function ChannelHeader(props: ChannelHeaderProps) {
   const { title } = props;
@@ -11,7 +13,7 @@ export default function ChannelHeader(props: ChannelHeaderProps) {
       <div className="header-item">
         {title || name}
       </div>
-      <img className="header-edit-icon" src="/edit.svg" alt="edit" />
+      <Image className="header-edit-icon" src="/edit.svg" alt="edit" width={20} height={20}/>
       <TypingIndicator />
     </div>
   )

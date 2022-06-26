@@ -1,15 +1,15 @@
 import React, { useRef } from "react";
-import { 
+import {
   Attachment,
-  messageHasReactions, 
-  MessageOptions, 
-  MessageRepliesCountButton, 
-  MessageStatus, 
-  MessageText, 
-  MessageTimestamp, 
-  ReactionSelector, 
-  SimpleReactionsList, 
-  useMessageContext 
+  messageHasReactions,
+  MessageOptions,
+  MessageRepliesCountButton,
+  MessageStatus,
+  MessageText,
+  MessageTimestamp,
+  ReactionSelector,
+  SimpleReactionsList,
+  useMessageContext
 } from "stream-chat-react";
 
 export default function Message() {
@@ -29,15 +29,15 @@ export default function Message() {
         <MessageOptions displayLeft={false} messageWrapperRef={messageWrapperRef} />
         <div className="message-header">
           <div className="message-header-name">{message.user?.name}</div>
-          <div className="message-header-timestamp">
-            <MessageTimestamp />
-          </div>
         </div>
         {showDetailedReactions && isReactionEnabled && (
           <ReactionSelector ref={reactionSelectorRef} />
         )}
         <MessageText />
         <MessageStatus />
+        <div className="message-header-timestamp">
+          <MessageTimestamp />
+        </div>
         {message.attachments && <Attachment attachments={message.attachments} />}
         {hasReactions && !showDetailedReactions && isReactionEnabled && <SimpleReactionsList />}
         <MessageRepliesCountButton reply_count={message.reply_count} />

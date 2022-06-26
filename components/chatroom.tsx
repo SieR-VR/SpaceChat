@@ -41,7 +41,7 @@ export default function Chatroom({ client }: { client: StreamChat }) {
       <Channel channel={channel} Message={Message} Input={Input}>
         <Window>
           <ChannelHeader />
-          <MessageList />
+          <MessageList disableDateSeparator={true}/>
           <MessageInput />
         </Window>
       </Channel>
