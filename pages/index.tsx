@@ -37,6 +37,15 @@ export default function Home() {
   }
 
   return (
-    <Settings session={session} />
+    <div>
+      <Head>
+        <title>SpaceTalk - Settings</title>
+        <meta name="description" content="The webapp for Twitter space!" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <Settings session={session} />
+    </div>
+
   )
 }
