@@ -12,7 +12,9 @@ export default async function(req: NextApiRequest, res: NextApiResponse) {
 
     const twitter = new TwitterApi({
         appKey: process.env.TWITTER_API_KEY,
-        appSecret: process.env.TWITTER_API_SECRET
+        appSecret: process.env.TWITTER_API_SECRET,
+        accessToken: token.accessToken as string,
+        accessSecret: token.refreshToken as string,
     });
     const client = await twitter.appLogin();
     console.log("Asdf");
