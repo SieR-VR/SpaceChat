@@ -7,6 +7,9 @@ const nextConfig = {
     TWITTER_OAUTH_CLIENT_SECRET: process.env.TWITTER_OAUTH_CLIENT_SECRET,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+  },
+  images: {
+    domains: ['pbs.twimg.com'],
   }
 }
 
