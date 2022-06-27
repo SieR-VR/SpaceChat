@@ -9,8 +9,26 @@ export const authOptions: NextAuthOptions = {
             version: "2.0"
         }),
     ],
+    callbacks: {
+        async jwt({ token, user, account, profile, isNewUser }) {
+            if (account.accessToken) {
+                token.accessToken = account.accessToken;
+            }
+
+            if (account.refreshToken) {
+                token.refreshToken = account.refreshToken;
+            }
+
+            return token;
+        },
+        async session({ session, token, user }) {
+            // Send properties to the client, like an access_token from a provider.
+            session.accessToken = token.accessToken
+            return session
+        }
+    },
     pages: {
-        signIn: '/',
+        signIn: '/'
     }
 }
 
