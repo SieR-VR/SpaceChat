@@ -11,18 +11,17 @@ export const authOptions: NextAuthOptions = {
     ],
     callbacks: {
         async jwt({ token, user, account, profile, isNewUser }) {
-            if (account.accessToken) {
-                token.accessToken = account.accessToken;
+            if (account) {
+                token.accessToken = account.access_token;
             }
 
-            if (account.refreshToken) {
-                token.refreshToken = account.refreshToken;
+            if (account) {
+                token.refreshToken = account.refresh_token;
             }
 
             return token;
         },
         async session({ session, token, user }) {
-            // Send properties to the client, like an access_token from a provider.
             session.accessToken = token.accessToken
             return session
         }
