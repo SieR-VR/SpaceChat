@@ -17,15 +17,15 @@ export default function Chatroom({ client, spaceId }: { client: StreamChat, spac
   const [channel, setChannel] = useState<StreamChatChannel | null>(null);
   useEffect(() => {
     (async () => {
-      const userinfo = await fetch("/api/twitter/userinfo", { method: "GET", })
+      const userInfo = await fetch("/api/twitter/user", { method: "GET", })
         .then(res => res.json());
-      const streamToken = await fetch("/api/user", { method: "POST", body: JSON.stringify({ id: userinfo.user.id }) })
+      const streamToken = await fetch("/api/user", { method: "POST", body: JSON.stringify({ id: userInfo.user.id }) })
         .then(res => res.json());
 
       await client.connectUser({
-        id: userinfo.user.id,
-        name: userinfo.user.name,
-        image: userinfo.user.image,
+        id: userInfo.user.id,
+        name: userInfo.user.name,
+        image: userInfo.user.image,
       }, streamToken.streamToken);
 
       const channel = client.getChannelById("messaging", spaceId, {});
