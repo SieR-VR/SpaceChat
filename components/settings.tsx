@@ -13,7 +13,10 @@ export default function Settings({ session }: { session: Session }) {
   useEffect(() => {
     (async () => {
       const userinfo = await fetch("/api/twitter/userinfo", {
-        method: "GET",
+        method: "POST",
+        body: JSON.stringify({
+          accessToken: session.accessToken,
+        }),
       });
 
       const userInfo = await userinfo.json();
