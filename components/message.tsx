@@ -26,15 +26,10 @@ export default function Message() {
   return (
     <div className="message-wrapper">
       <div className="message-wrapper-content">
-        <MessageOptions displayLeft={false} messageWrapperRef={messageWrapperRef} />
         <div className="message-header">
           <div className="message-header-name">{message.user?.name}</div>
         </div>
-        {showDetailedReactions && isReactionEnabled && (
-          <ReactionSelector ref={reactionSelectorRef} />
-        )}
         <MessageText />
-        <MessageStatus />
         <div className="message-header-timestamp">
           <MessageTimestamp />
         </div>

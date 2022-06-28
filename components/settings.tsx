@@ -7,8 +7,8 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 
 export default function Settings({ session }: { session: Session }) {
-  const [user, setUser] = useState({ name: "", image: "", username: "" });
-  const [space, setSpace] = useState("");
+  const [user, setUser] = useState({ id: "", name: "", username: "" });
+  const [space, setSpace] = useState({ id: "", title: "" });
 
   useEffect(() => {
     (async () => {
@@ -18,19 +18,19 @@ export default function Settings({ session }: { session: Session }) {
 
       const userInfo = await userinfo.json();
       setUser(userInfo.user);
-      setSpace(userInfo.space.title);
+      setSpace(userInfo.space);
     })();
   }, []);
 
   return (
     <div className="settings-container">
       <div className="settings-header" style={{
-        background: (space !== "") ? "" : "#AAA",
-        boxShadow: (space !== "") ? "0px 0px 10px #6b54fb" : "none",
+        background: (space.title !== "") ? "" : "#AAA",
+        boxShadow: (space.title !== "") ? "0px 0px 10px #6b54fb" : "none",
       }}>
-        {user.name && (space ? (
+        {user.name && (space.title ? (
           <div className="settings-header-title">
-            {space}
+            {space.title}
           </div>
         ) : (
           <div className="settings-header-title">
@@ -71,9 +71,38 @@ export default function Settings({ session }: { session: Session }) {
         </div>
       </div>
       <div className="settings-footer">
-        <button className="settings-footer-button" onClick={() => {
-          signOut();
-        }}>시작!</button>
+        <button className="settings-footer-button" onClick={async () => {
+          const streamToken = await fetch('/api/user', {
+            method: "POST",
+            body: JSON.stringify({
+              id: user.id,
+            }),
+          }).then(res => res.json());
+          
+          if (!streamToken.streamToken) {
+            alert("스트림 토큰을 받아오지 못했어요. 다시 시도해주세요.");
+            return;
+          }
+
+          const channel = await fetch('/api/channel', {
+            method: "POST",
+            body: JSON.stringify({
+              id: user.id,
+              spaceId: space.id,
+              spaceTitle: space.title
+            }),
+          }).then(res => res.json());
+
+          if (!channel.redirect) {
+            alert("채널을 받아오지 못했어요. 다시 시도해주세요.");
+            return;
+          }
+
+          window.location.href = channel.redirect;
+        }} style={{
+          background: space.title ? "" : "#AAA",
+          boxShadow: space.title ? "0px 0px 10px #6b54fb" : "none",
+        }} disabled={!!!space.title}>시작!</button>
         <a className="settings-footer-return" onClick={() => {
           signOut();
         }}>처음으로 돌아갈래요..</a>
