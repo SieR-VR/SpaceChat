@@ -24,7 +24,7 @@ export const authOptions: NextAuthOptions = {
         async session({ session, token, user }) {
             session.accessToken = token.accessToken
             return session
-        }
+        },
     },
     pages: {
         signIn: '/'

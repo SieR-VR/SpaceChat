@@ -20,7 +20,7 @@ export default function Home() {
           <div className='twitter-button-wrapper'>
             <button className="twitter-button" onClick={(e) => {
               e.preventDefault();
-              signIn('twitter');
+              signIn('twitter', null, { scope: 'tweet.read users.read space.read' });
             }}>
               <Image src="/twitter.svg" alt="twitter" width={59} height={48} />
             </button>
@@ -44,7 +44,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Settings session={session} />
+      <main>
+        <Settings session={session} />
+      </main>
     </div>
 
   )

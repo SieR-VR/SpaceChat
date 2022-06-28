@@ -8,20 +8,35 @@ export default async function(req: NextApiRequest, res: NextApiResponse) {
         secret: process.env.NEXTAUTH_SECRET,
     });
 
-    console.log(token);
+    const twitter = new TwitterApi(token.accessToken as string);
+    const user = await twitter.currentUserV2();
+    
+    // const space = await twitter.v2.spacesByCreators([user.data.id], {
+    //     "space.fields": 'title'
+    // });
+    // if (!space.meta.result_count) {
+    //     return res.status(200).json({
+    //         user: user.data,
+    //         meta: "No spaces found"
+    //     });
+    // }
 
-    const twitter = new TwitterApi({
-        appKey: process.env.TWITTER_API_KEY,
-        appSecret: process.env.TWITTER_API_SECRET,
-        accessToken: token.accessToken as string,
-        accessSecret: token.refreshToken as string,
-    });
-    const client = await twitter.appLogin();
-    console.log("Asdf");
-
-    await client.currentUserV2().then(console.log);
+    // const liveSpace = space.data.find(s => s.state === 'live');
+    // if (!liveSpace) {
+    //     return res.status(404).json({
+    //         user: user.data,
+    //         meta: "No live space found"
+    //     });
+    // }
 
     res.status(200).json({
-        message: "OK",
+        user: {
+            id: user.data.id,
+            name: user.data.name,
+        },
+        space: {
+            id: 'sample-space-id',
+            title: 'Sample Space',
+        }
     });
 }
