@@ -11,7 +11,7 @@ export default function Home() {
     return (
       <div>
         <Head>
-          <title>SpaceChat</title>
+          <title>SpaceTalk</title>
           <meta name="description" content="The webapp for Twitter space!" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
