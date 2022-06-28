@@ -3,12 +3,9 @@ import { getToken } from "next-auth/jwt";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function(req: NextApiRequest, res: NextApiResponse) {
-    const token = await getToken({ 
-        req,
-        secret: process.env.NEXTAUTH_SECRET,
-    });
+    const accessToken = JSON.parse(req.body).accessToken;
 
-    const twitter = new TwitterApi(token.accessToken as string);
+    const twitter = new TwitterApi(accessToken as string);
     const user = await twitter.currentUserV2();
     
     const space = await twitter.v2.spacesByCreators([user.data.id], {
