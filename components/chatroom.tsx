@@ -20,12 +20,19 @@ export default function Chatroom({ client, spaceId }: { client: StreamChat, spac
 
   useEffect(() => {
     (async () => {
-      const userInfo = await fetch("/api/twitter/user", { method: "POST", body: JSON.stringify({
-        accessToken: session.accessToken,
-      })})
+      const userInfo = await fetch("/api/twitter/user", {
+        method: "POST", body: JSON.stringify({
+          accessToken: session.accessToken,
+        })
+      })
         .then(res => res.json());
-      const streamToken = await fetch("/api/user", { method: "POST", body: JSON.stringify({ id: userInfo.user.id }) })
-        .then(res => res.json());
+      const streamToken = await fetch("/api/user", {
+        method: "POST", body: JSON.stringify({
+          id: userInfo.user.id,
+        })
+      }).then(res => res.json());
+
+      const channelRegister = await fetch(`/api/channel?id=${userInfo.user.id}&spaceId=${spaceId}`, { method: "GET" })
 
       await client.connectUser({
         id: userInfo.user.id,
@@ -53,7 +60,7 @@ export default function Chatroom({ client, spaceId }: { client: StreamChat, spac
       <Channel channel={channel} Message={Message} Input={Input}>
         <Window>
           <ChannelHeader />
-          <MessageList disableDateSeparator={true}/>
+          <MessageList disableDateSeparator={true} />
           <MessageInput />
         </Window>
       </Channel>

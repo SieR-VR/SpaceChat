@@ -35,4 +35,23 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
             });
         }
     }
+
+    if (req.method === "GET") {
+        const { id, spaceId } = req.query as { id: string, spaceId: string };
+
+        if (!spaceIdChannelMap.has(spaceId)) {
+            res.status(404).json({
+                meta: "Channel not found",
+            });
+        }
+        else {
+            const channel = spaceIdChannelMap.get(spaceId);
+            channel.addMembers([id]);
+
+            res.status(200).json({
+                redirect: `/space/${spaceId}`,
+                meta: "Channel found",
+            });
+        }
+    }
 }
