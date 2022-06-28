@@ -12,16 +12,15 @@ export default function Settings({ session }: { session: Session }) {
 
   useEffect(() => {
     (async () => {
-      const userinfo = await fetch("/api/twitter/userinfo", {
+      const spaceInfo = await fetch("/api/twitter/space", {
         method: "POST",
         body: JSON.stringify({
           accessToken: session.accessToken,
         }),
-      });
+      }).then(res => res.json());
 
-      const userInfo = await userinfo.json();
-      setUser(userInfo.user);
-      setSpace(userInfo.space);
+      setUser(spaceInfo.user);
+      setSpace(spaceInfo.space);
     })();
   }, []);
 

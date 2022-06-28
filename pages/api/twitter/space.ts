@@ -1,5 +1,4 @@
 import { TwitterApi } from "twitter-api-v2";
-import { getToken } from "next-auth/jwt";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function(req: NextApiRequest, res: NextApiResponse) {
