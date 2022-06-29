@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Session } from 'next-auth';
+import { useSession } from 'next-auth/react';
 import { StreamChat, Channel as StreamChatChannel } from "stream-chat";
 import {
   Channel,
@@ -12,7 +12,6 @@ import {
 import Message from './message';
 import ChannelHeader from './channelHeader';
 import Input from './input';
-import { useSession } from 'next-auth/react';
 
 export default function Chatroom({ client, spaceId }: { client: StreamChat, spaceId: string }) {
   const [channel, setChannel] = useState<StreamChatChannel | null>(null);
@@ -20,19 +19,22 @@ export default function Chatroom({ client, spaceId }: { client: StreamChat, spac
 
   useEffect(() => {
     (async () => {
-      const userInfo = await fetch("/api/twitter/user", {
-        method: "POST", body: JSON.stringify({
-          accessToken: session.accessToken,
-        })
-      })
-        .then(res => res.json());
+      const userInfo = await fetch(`/api/twitter/user?accessToken=${session.accessToken}`, {
+        method: "GET"
+      }).then(res => res.json());
+
       const streamToken = await fetch("/api/user", {
         method: "POST", body: JSON.stringify({
           id: userInfo.user.id,
         })
       }).then(res => res.json());
 
-      const channelRegister = await fetch(`/api/channel?id=${userInfo.user.id}&spaceId=${spaceId}`, { method: "GET" })
+      await fetch(`/api/channel/user`, {
+        method: "POST", body: JSON.stringify({
+          spaceId,
+          id: userInfo.user.id,
+        })
+      })
 
       await client.connectUser({
         id: userInfo.user.id,

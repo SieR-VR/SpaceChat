@@ -8,26 +8,19 @@ const client = StreamChat.getInstance(ApiKey, ApiSecret);
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
     if (req.method === "POST") {
-        const { id, spaceTitle, spaceId } = JSON.parse(req.body);
+        const { spaceId, id } = JSON.parse(req.body) as { spaceId: string, id: string };
 
         try {
-            const channel = client.channel('messaging', spaceId, {
-                name: spaceTitle,
-                created_by: {
-                    id,
-                },
-            })
-            await channel.create();
+            const channel = client.getChannelById("messaging", spaceId, {});
             await channel.addMembers([id]);
 
             res.status(200).json({
-                redirect: `/space/${spaceId}`,
-                meta: "Channel created",
+                meta: `User joined channel ${spaceId}`,
             });
         } catch (error) {
             res.status(500).json({
                 error: error.message,
-                meta: "Channel creation failed",
+                meta: "Channel join failed",
             });
         }
     }
