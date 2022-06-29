@@ -7,23 +7,27 @@ import Settings from '../components/settings';
 export default function Home() {
   const { data: session } = useSession();
 
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
   if (!session) {
     return (
-      <div>
+      <div style={{ width: '100%', height: '100%' }}>
         <Head>
           <title>SpaceTalk</title>
           <meta name="description" content="The webapp for Twitter space!" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <main style={{ flexDirection: 'column' }}>
+        <main style={{ width: `${window.innerWidth}px`, height: `${window.innerHeight}px`, flexDirection: 'column' }}>
           <div className='twitter-button-wrapper'>
-            <button className="twitter-button" onClick={(e) => {
+            <a className="twitter-button" onClick={(e) => {
               e.preventDefault();
               signIn('twitter', null, { scope: 'tweet.read users.read space.read' });
             }}>
               <Image src="/twitter.svg" alt="twitter" width={59} height={48} />
-            </button>
+            </a>
             <p className="twitter-button-description">
               Login with Twitter!
             </p>
@@ -44,7 +48,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main style={{ width: `${window.innerWidth}px`, height: `${window.innerHeight}px`}}>
         <Settings session={session} />
       </main>
     </div>
