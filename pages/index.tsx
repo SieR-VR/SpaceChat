@@ -19,7 +19,7 @@ export default function Home() {
 
   if (!session) {
     return (
-      <div style={{ width: '100%', height: '100%' }}>
+      <>
         <Head>
           <title>SpaceTalk</title>
           <meta name="description" content="The webapp for Twitter space!" />
@@ -39,13 +39,13 @@ export default function Home() {
             SpaceTalk!
           </div>
         </main>
-      </div>
+      </>
     )
   }
 
   alert(session.expires);
   return (
-    <div>
+    <>
       <Head>
         <title>SpaceTalk - Settings</title>
         <meta name="description" content="The webapp for Twitter space!" />
@@ -55,7 +55,7 @@ export default function Home() {
       <main style={{ width: `${window.innerWidth}px`, height: `${window.innerHeight}px`}}>
         <Settings session={session} />
       </main>
-    </div>
+    </>
 
   )
 }

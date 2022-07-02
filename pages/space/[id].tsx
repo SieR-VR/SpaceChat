@@ -21,7 +21,7 @@ export default function Space() {
 
   if (!session) {
     return (
-      <div style={{ width: "100%", height: "100%" }}>
+      <>
         <Head>
           <title>SpaceTalk - {id}</title>
           <meta name="description" content="The webapp for Twitter space!" />
@@ -44,7 +44,7 @@ export default function Space() {
             SpaceTalk!
           </div>
         </main>
-      </div>
+      </>
     )
   }
 
