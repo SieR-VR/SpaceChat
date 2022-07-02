@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { Session } from 'next-auth';
 import { StreamChat, Channel as StreamChatChannel } from "stream-chat";
 import {
   Channel,
@@ -13,9 +14,8 @@ import Message from './message';
 import ChannelHeader from './channelHeader';
 import Input from './input';
 
-export default function Chatroom({ client, spaceId }: { client: StreamChat, spaceId: string }) {
+export default function Chatroom({ client, spaceId, session }: { client: StreamChat, spaceId: string, session: Session }) {
   const [channel, setChannel] = useState<StreamChatChannel | null>(null);
-  const { data: session } = useSession();
 
   useEffect(() => {
     (async () => {
