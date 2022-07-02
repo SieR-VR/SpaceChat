@@ -15,20 +15,24 @@ export default function Space() {
   const { id } = router.query;
   const { data: session } = useSession();
 
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
   if (!session) {
     return (
-      <div>
+      <div style={{ width: "100%", height: "100%" }}>
         <Head>
           <title>SpaceTalk - {id}</title>
           <meta name="description" content="The webapp for Twitter space!" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <main style={{ flexDirection: 'column' }}>
+        <main>
           <div className='twitter-button-wrapper'>
             <button className="twitter-button" onClick={(e) => {
               e.preventDefault();
-              signIn('twitter');
+              signIn('twitter', null, { scope: "users.read" });
             }}>
               <Image src="/twitter.svg" alt="twitter" width={59} height={48} />
             </button>
@@ -52,8 +56,8 @@ export default function Space() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <Chatroom client={client} spaceId={id as string}/>
+      <main style={{ width: `${window.innerWidth}px`, height: `${window.innerHeight}px`, flexDirection: 'column' }}>
+        <Chatroom client={client} spaceId={id as string} session={session}/>
       </main>
     </>
   )

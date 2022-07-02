@@ -10,6 +10,7 @@ export default async function(req: NextApiRequest, res: NextApiResponse) {
     const space = await twitter.v2.spacesByCreators([user.data.id], {
         "space.fields": 'title'
     });
+
     if (!space.meta.result_count) {
         return res.status(200).json({
             user: user.data,

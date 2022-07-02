@@ -19,16 +19,16 @@ export default function Settings({ session }: { session: Session }) {
         }),
       }).then(res => res.json());
 
-      setUser(spaceInfo.user);
-      setSpace(spaceInfo.space);
+      setUser(spaceInfo.user || { id: "", name: "", username: "" });
+      setSpace(spaceInfo.space || { id: "", title: "" });
     })();
   }, []);
 
   return (
     <div className="settings-container">
       <div className="settings-header" style={{
-        background: (space.title !== "") ? "" : "#AAA",
-        boxShadow: (space.title !== "") ? "0px 0px 10px #6b54fb" : "none",
+        background: space.title ? "" : "#AAA",
+        boxShadow: space.title ? "0px 0px 10px #6b54fb" : "none",
       }}>
         {user.name && (space.title ? (
           <div className="settings-header-title">
